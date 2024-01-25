@@ -20,6 +20,6 @@ repos:
     hooks:
     - id: pytest
       name: pytest
-      stages: [pre-push]
+      stages: [pre-push] #stage
       entry: ./run.sh  
       language: system
