@@ -20,6 +20,6 @@ repos:
     hooks:
     - id: pytest
       name: pytest
-      stages: [push]
+      stages: [pre-push]
       entry: ./run.sh  # Replace with the actual path to your .sh file
       language: system
