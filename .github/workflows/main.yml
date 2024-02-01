@@ -1,0 +1,47 @@
+name: PyTest on action
+on: 
+  pull_request:
+    types:
+      - opened
+      - reopened
+  push:  
+    branches:
+      - main
+jobs:
+  run_pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code...
+        uses: actions/checkout@v3
+
+      - name: Check files using the black formatter
+        id: action_black
+        uses: psf/black@stable
+        with:
+          options: "--pyi --safe --verbose"
+          src: "./src"
+          jupyter: true
+          
+      - name: Check files using the Ruff linter
+        uses: chartboost/ruff-action@v1
+        with:
+          args: "--fix --no-unsafe-fixes --no-cache"
+
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          auto-update-conda: true
+          python-version: 3.11
+
+      - name: Bash
+        shell: bash -el {0}
+        run: |
+          conda info
+          conda install pip
+          pip install pytest pytest-cov pytest-html
+          pip install datasets==2.15.0
+          pip install .
+          conda list
+          pytest -s -v test
+          
+
+      
