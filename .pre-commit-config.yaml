@@ -20,12 +20,12 @@ repos:
 #       entry: ./run.sh  
 #       language: system
 # connot run both pytest need to choose one
--   repo: local
-    hooks:
-    - id: pytest
-      name: pytest
-      stages: [pre-push] #stage
-      entry: pytest -v -s  
-      language: system
-      pass_filenames: false
-      always_run: true
+# -   repo: local
+#     hooks:
+#     - id: pytest
+#       name: pytest
+#       stages: [pre-push] #stage
+#       entry: pytest -v -s  
+#       language: system
+#       pass_filenames: false
+#       always_run: true

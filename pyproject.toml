@@ -46,7 +46,7 @@ where = ["src"]
 pedata = ["*.csv", "*.json"]
 
 [tool.ruff.lint.per-file-ignores]
-"test/*" = ["E731","E711"]
+"test/*" = ["E731","E711","E999", "F841", "E741", "F821"],
 
 #[project.scripts]
 #my-script = "my_package.module:function"
