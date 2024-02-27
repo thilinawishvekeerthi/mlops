@@ -27,7 +27,7 @@ jobs:
         python-version: ["3.11"]
 
     steps:
-      # Checkout codebase
+      # Checkout codebase test
       - name: Checkout code
         uses: actions/checkout@v4
         with:
