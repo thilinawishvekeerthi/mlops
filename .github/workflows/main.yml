@@ -108,3 +108,15 @@ jobs:
           branch: ${{ github.head_ref }}
           github_token: ${{ github.token }}
           force: true
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [run]
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: src/pedata/docs/build
