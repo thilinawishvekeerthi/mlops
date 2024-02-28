@@ -1,0 +1,21 @@
+pedata.transform package
+========================
+
+Submodules
+----------
+
+pedata.transform.transform\_pipeline module
+-------------------------------------------
+
+.. automodule:: pedata.transform.transform_pipeline
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: pedata.transform
+   :members:
+   :undoc-members:
+   :show-inheritance:
