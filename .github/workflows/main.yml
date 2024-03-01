@@ -19,130 +19,138 @@ env:
   MIN_COV: 80
 
 jobs:
-  # run:
-  #   runs-on: ${{ matrix.os }}
-  #   strategy:
-  #     matrix:
-  #       os: [ubuntu-latest]
-  #       python-version: ["3.11"]
+  run:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ["3.11"]
 
-  #   steps:
-  #     # Checkout codebase test
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
-  #       with:
-  #         token: ${{ github.token }}
-
-  #     # Black formatter execution
-  #     # - name: Check files using the black formatter
-  #     #   id: action_black
-  #     #   uses: psf/black@stable
-  #     #   with:
-  #     #     options: "--pyi --safe --verbose"
-  #     #     src: "./src"
-  #     #     jupyter: true
-          
-  #     # Ruff linter execution
-  #     # - name: Check files using the Ruff linter
-  #     #   uses: chartboost/ruff-action@v1
-  #     #   with:
-  #     #     args: "--fix --no-unsafe-fixes --no-cache"
-
-  #     # Setup Python environtment
-  #     - name: Setup Python
-  #       uses: actions/setup-python@v5
-  #       with:
-  #         python-version: ${{ matrix.python-version }}
-  #         cache: 'pip'
-
-  #     - name: Configure company dependancies
-  #       if: false
-  #       run: |
-  #         sh install_Company_dependencies.sh
-      
-  #     - name: Configure dependancies
-  #       run: |
-  #         pip install .
-  #         pip install pytest pytest-cov pytest-html
-  #         pip install datasets==2.15.0
-  #         pip install sphinx
-  #         pip install sphinx-press-theme
-  #         pip list
-          
-  #     - name: Generate API documentation
-  #       run: |
-  #         PACKAGE_PATH=src/pedata 
-  #         sphinx-apidoc -f -o $PACKAGE_PATH/docs/source $PACKAGE_PATH
-  
-  #     - name: Build Docs
-  #       run: |
-  #         PACKAGE_PATH=src/pedata 
-  #         sphinx-build -M html $PACKAGE_PATH/docs/source $PACKAGE_PATH/docs/build
-          
-  #     - name: Debug
-  #       run: |
-  #         ls -R src/pedata/docs/build
-          
-  #       # PyTest and coverage
-  #     # - name: Run PyTest & Generate Coverage Report  
-  #     #   run: |  
-  #     #     coverage run -m pytest -v -s --junitxml=test-results.xml
-  #     #     coverage report -m --fail-under=$MIN_COV
-
-  #     # Comment test result on commmit
-  #     # - name: Publish Test Results
-  #     #   uses: EnricoMi/publish-unit-test-result-action@v2
-  #     #   with:
-  #     #     files: test-results.xml
-
-  #     # Commit & push changes
-  #     - name: Check for modified files
-  #       id: git-check
-  #       run: echo "modified=$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)" >> $GITHUB_OUTPUT
-  #     - name: Commit changes
-  #       if: steps.git-check.outputs.modified == 'true'
-  #       run: |
-  #         git config --local user.email "github-actions[bot]@users.noreply.github.com"
-  #         git config --local user.name "github-actions[bot]"
-  #         git commit -a -m "Add changes"
-  #     - name: Push changes
-  #       if: steps.git-check.outputs.modified == 'true'
-  #       uses: ad-m/github-push-action@master
-  #       with:
-  #         branch: ${{ github.head_ref }}
-  #         github_token: ${{ github.token }}
-  #         force: true
-  #     - name: Commit changes Doc Html
-  #       run: |
-  #         git config --local user.email "github-actions[bot]@users.noreply.github.com"
-  #         git config --local user.name "github-actions[bot]"
-  #         git add src/pedata/docs/build/html
-  #         git commit -a -m "Generated Project Web Html"
-  #     - name: Push Doc Html changes
-  #       uses: ad-m/github-push-action@master
-  #       with:
-  #         branch: ${{ github.head_ref }}
-  #         github_token: ${{ github.token }}
-  #         force: true      
-  deploy:
-    runs-on: ubuntu-latest
     steps:
+      # Checkout codebase test
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ github.token }}
 
-    - name: Debug
-      run: |
-        ls 
-        
-    - name: Checkout Repository
-      uses: actions/checkout@v4
-      with:
-        token: ${{ github.token }}
+      # Black formatter execution
+      # - name: Check files using the black formatter
+      #   id: action_black
+      #   uses: psf/black@stable
+      #   with:
+      #     options: "--pyi --safe --verbose"
+      #     src: "./src"
+      #     jupyter: true
+          
+      # Ruff linter execution
+      # - name: Check files using the Ruff linter
+      #   uses: chartboost/ruff-action@v1
+      #   with:
+      #     args: "--fix --no-unsafe-fixes --no-cache"
+
+      # Setup Python environtment
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
+
+      - name: Configure company dependancies
+        if: false
+        run: |
+          sh install_Company_dependencies.sh
       
-    - name: Debug
-      run: |
-        ls -R src/pedata
+      - name: Configure dependancies
+        run: |
+          pip install .
+          pip install pytest pytest-cov pytest-html
+          pip install datasets==2.15.0
+          pip install sphinx
+          pip install sphinx-press-theme
+          pip list
+          
+      - name: Generate API documentation
+        run: |
+          PACKAGE_PATH=src/pedata 
+          sphinx-apidoc -f -o $PACKAGE_PATH/docs/source $PACKAGE_PATH
+  
+      - name: Build Docs
+        run: |
+          PACKAGE_PATH=src/pedata 
+          sphinx-build -M html $PACKAGE_PATH/docs/source $PACKAGE_PATH/docs/build
+          
+      - name: Debug
+        run: |
+          ls -R src/pedata/docs/build
+          
+        # PyTest and coverage
+      # - name: Run PyTest & Generate Coverage Report  
+      #   run: |  
+      #     coverage run -m pytest -v -s --junitxml=test-results.xml
+      #     coverage report -m --fail-under=$MIN_COV
+
+      # Comment test result on commmit
+      # - name: Publish Test Results
+      #   uses: EnricoMi/publish-unit-test-result-action@v2
+      #   with:
+      #     files: test-results.xml
+
+      # Commit & push changes
+      - name: Check for modified files
+        id: git-check
+        run: echo "modified=$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)" >> $GITHUB_OUTPUT
+      - name: Commit changes
+        if: steps.git-check.outputs.modified == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -a -m "Add changes"
+      - name: Push changes
+        if: steps.git-check.outputs.modified == 'true'
+        uses: ad-m/github-push-action@master
+        with:
+          branch: ${{ github.head_ref }}
+          github_token: ${{ github.token }}
+          force: true
+      - name: Debug
+        run: |
+          ls -R src/pedata/docs/build/html
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: src/pedata/docs/build/html
+      # - name: Commit changes Doc Html
+      #   run: |
+      #     git config --local user.email "github-actions[bot]@users.noreply.github.com"
+      #     git config --local user.name "github-actions[bot]"
+      #     git add src/pedata/docs/build/html
+      #     git commit -a -m "Generated Project Web Html"
+      # - name: Push Doc Html changes
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     branch: ${{ github.head_ref }}
+      #     github_token: ${{ github.token }}
+      #     force: true      
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   steps:
+
+  #   - name: Debug
+  #     run: |
+  #       ls 
         
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: src/pedata/docs/build/html
+  #   - name: Checkout Repository
+  #     uses: actions/checkout@v4
+  #     with:
+  #       token: ${{ github.token }}
+      
+  #   - name: Debug
+  #     run: |
+  #       ls -R src/pedata
+        
+  #   - name: Deploy to GitHub Pages
+  #     uses: peaceiris/actions-gh-pages@v3
+  #     with:
+  #       github_token: ${{ secrets.GITHUB_TOKEN }}
+  #       publish_dir: src/pedata/docs/build/html
