@@ -3,8 +3,9 @@ from pedata import (
     ClassificationToyDataset,
 )
 
-# def test_failing_test():
-#     assert 1 == 2
+
+def test_failing_test():
+    assert 1 == 2
 
 
 def test_passing_test():
