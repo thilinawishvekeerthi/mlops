@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../_static/documentation_options.js?v=13ac3d8e"></script>
+        <script src="../../_static/documentation_options.js?v=ad0f7eaa"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -150,7 +150,7 @@
 <span class="sd">- target adjustement for optimization objectives</span>
 <span class="sd">- summary variable calculation</span>
 <span class="sd">- metadata handling.</span>
-
+<span class="sd">- add something new</span>
 <span class="sd">============ util.py ===========</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
@@ -173,6 +173,7 @@
     <span class="s2">&quot;append_summary_variable&quot;</span><span class="p">,</span>
     <span class="s2">&quot;DatasetHandler&quot;</span><span class="p">,</span>
 <span class="p">]</span>
+
 
 <div class="viewcode-block" id="OptimizationObjective">
 <a class="viewcode-back" href="../../pedata.html#pedata.util.OptimizationObjective">[docs]</a>
@@ -206,6 +207,7 @@
     <span class="n">weight</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># weight for the objective</span></div>
 
 
+
 <span class="k">def</span> <span class="nf">load_full_dataset</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dataset</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Load a full dataset rather than a specific split of the dataset</span>
@@ -217,6 +219,7 @@
     <span class="n">dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">)</span>
     <span class="n">full_dataset</span> <span class="o">=</span> <span class="n">concatenate_datasets</span><span class="p">([</span><span class="n">dataset</span><span class="p">[</span><span class="n">split</span><span class="p">]</span> <span class="k">for</span> <span class="n">split</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">full_dataset</span>
+
 
 <div class="viewcode-block" id="get_target_columns">
 <a class="viewcode-back" href="../../pedata.html#pedata.util.get_target_columns">[docs]</a>
@@ -249,6 +252,7 @@
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
             <span class="s2">&quot;Invalid input: try again with a valid dataset to extract target columns.&quot;</span>
         <span class="p">)</span></div>
+
 
 
 <div class="viewcode-block" id="get_target">
@@ -316,6 +320,7 @@
         <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">normalization</span><span class="p">(</span><span class="n">targ_values</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">targ_keys</span><span class="p">)}</span></div>
 
 
+
 <span class="k">def</span> <span class="nf">adjust_single_target_maximization</span><span class="p">(</span>
     <span class="n">target_value</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="n">target_opt_obj</span><span class="p">:</span> <span class="n">OptimizationObjective</span><span class="p">,</span>
@@ -362,6 +367,7 @@
         <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span>
             <span class="n">target_value</span> <span class="o">-</span> <span class="n">target_opt_obj</span><span class="o">.</span><span class="n">aim_for</span>
         <span class="p">)</span>  <span class="c1"># Adjust the target variable to get close to a fixed value if the objective is fixed</span>
+
 
 <div class="viewcode-block" id="adjust_all_targets_maximization">
 <a class="viewcode-back" href="../../pedata.html#pedata.util.adjust_all_targets_maximization">[docs]</a>
@@ -435,6 +441,7 @@
     <span class="k">return</span> <span class="n">dataset</span></div>
 
 
+
 <div class="viewcode-block" id="zscore">
 <a class="viewcode-back" href="../../pedata.html#pedata.util.zscore">[docs]</a>
 <span class="k">def</span> <span class="nf">zscore</span><span class="p">(</span>
@@ -482,6 +489,7 @@
     <span class="k">return</span> <span class="n">normalized_array</span></div>
 
 
+
 <div class="viewcode-block" id="de_zscore_predictions">
 <a class="viewcode-back" href="../../pedata.html#pedata.util.de_zscore_predictions">[docs]</a>
 <span class="k">def</span> <span class="nf">de_zscore_predictions</span><span class="p">(</span>
@@ -521,6 +529,7 @@
 
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">de_zs_pred_means</span></div>
+
 
 
 <div class="viewcode-block" id="get_summary_variable">
@@ -595,6 +604,7 @@
     <span class="k">return</span> <span class="n">summary</span></div>
 
 
+
 <div class="viewcode-block" id="append_summary_variable">
 <a class="viewcode-back" href="../../pedata.html#pedata.util.append_summary_variable">[docs]</a>
 <span class="k">def</span> <span class="nf">append_summary_variable</span><span class="p">(</span>
@@ -651,6 +661,7 @@
                 <span class="n">dataset</span><span class="p">,</span> <span class="n">normalization</span><span class="o">=</span><span class="n">normalization</span><span class="p">,</span> <span class="n">objectives</span><span class="o">=</span><span class="n">objectives</span>
             <span class="p">),</span>
         <span class="p">)</span></div>
+
 
 
 <div class="viewcode-block" id="DatasetHandler">
@@ -794,6 +805,7 @@
             <span class="n">rval</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idx</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">idx</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">stop</span><span class="p">)))</span>
         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">rval</span><span class="p">)</span></div>
 </div>
+
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
