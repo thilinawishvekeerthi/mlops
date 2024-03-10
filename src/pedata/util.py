@@ -7,7 +7,7 @@ The util module contains utility functions for HuggingFace datasets such as:
 - target adjustement for optimization objectives
 - summary variable calculation
 - metadata handling.
-- added change
+- adding something new 
 ============ util.py ===========
 """
 

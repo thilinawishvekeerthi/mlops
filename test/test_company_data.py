@@ -5,7 +5,8 @@ from pedata import (
 
 
 def test_failing_test():
-    assert 1 == 1
+    # assuming the new changes breaks exisiting test
+    assert 1 == 2
 
 
 def test_passing_test():
